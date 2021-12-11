@@ -12,24 +12,23 @@ $ npm install
 ```
 
 ## Requirements
+You need to write a program that **maintains a count** of both the number of children and adults inside a soft player center. Inside the `src/soft-play.js` file, you should add the following functions:
 
-You need to write a program that maintains a count of the number of children and adults inside a soft player center. Inside the `src/soft-play.js` file, you should add the following functions:
+### function enter(numChildren, numAdults) 
+This function should **increase the count of children and adults** by the passed values and return `true`.
 
-### enter(numChildren, numAdults) 
-This function should increase the number of children and adults by the passed values and return true - as long as the following conditions are met:
+Since every child must also be accompanied by at least one adult, if the number of children is *greater* than the number of adults, then the function should return `false` and the adults and children should not be added to the current total.
 
-* A child must also be accompanied by at least one adult
-* An adult must not be responsible for more than 3 children 
+### function leave(numChildren, numAdults)
+This function should **decrease the count of children and adults** by the passed values and return `true`. 
 
-If any of these conditions are false, the function should return false and the adults and children should not be added to the current total.
+However, if a child attempts to leave on their own without and adult, the function should return `false` and the counts should not be changed. 
 
-### leave(numChildren, numAdults)
-This function should decrease the number of children and adults by the passed values and return true - as long as the following conditions are met:
+Since there should be at least 1 adult for every child inside the soft play center, if an adult attempting to leave would cause there to be more children than adults left inside then the function should return `false` and the counts should not be changed.
 
-* A child cannot leave on their own.
-* There should be at least 1 adult for every 3 children left inside the soft player center
+The function should also return `false` if the number of adults or children attempting to leave is greater than the current counts - for example, if there is 1 adult and 1 child inside the center, 2 children and 2 adults attempting to leave should return `false` and the counts should not be changed.
 
-### occupancy()
+### function occupancy()
 This function should return an object with two keys - `adults` should contain the number of children currently inside the soft play center and `children` the number of children. For example:
 
 ```javascript
@@ -39,6 +38,68 @@ This function should return an object with two keys - `adults` should contain th
 }
 ```
 
+## Tips
+Remember functions also have access to variables defined in their enclosing scope. For example both of the functions below update the same `counter` variable:
+
+```javascript
+let counter = 0
+
+function incrementCounter() {
+  counter++
+}
+
+function decrementCounter() {
+  counter--
+}
+```
+
+## Example
+The REPL extract below illustrates the expected behavior of the functions.
+```javascript
+//counts start at 0
+> occupancy()
+{ adults: 0, children: 0 } 
+
+//2 adults and 1 child enter
+> enter(2, 1) 
+true
+
+//counts are updated
+> occupancy()
+{ adults: 2, children: 1 }  
+
+//1 adult leaves
+> leave(1, 0)
+true
+
+//Only 1 adult and 1 child remain
+> occupancy()
+{ adults: 1, children: 1 } 
+
+//a child attempts to enter on their own, enter returns false
+> enter(0,1)  
+false
+
+//counts stay the same
+> occupancy()
+{ adults: 1, children: 1 } 
+
+//the last adult attempts to leave so false is returned (as child would be on their own in soft play)
+> leave(1,0)
+false
+
+//counts stay the same
+> occupancy() 
+{ adults: 1, children: 1 }
+
+//the last child and adult leave together
+> leave(1,1) 
+true
+
+//both counts are now 0
+> occupancy() 
+{ adults: 0, children: 0 }
+```
 ## Testing
 A test has already been created for your function inside
 `spec/soft-play.spec.js`. You should not need to modify this file. You can run the tests using npx:
@@ -59,4 +120,4 @@ This function should return an object with the same structure as `occupancy`, bu
 Once you have completed the exercise, take a moment to ask yourself the following questions and consider how you could implement changes to your code to support these:
 
 * The functions you have created only consider a single soft play center - what if we wanted to keep track of multiple soft play centers at the same time?
-* If we do keep track of multiple soft play centers, imagine we also want to have different rules for different centers. For example, perhaps some centers a child must be accompanied by 1 adult only. How would you implement this?
+* If we do keep track of multiple soft play centers, imagine we also want to have different rules for different centers. For example, perhaps some centers a child must be accompanied by at least 2 adults. How would you implement this?
