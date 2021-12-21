@@ -12,6 +12,18 @@ describe("Soft Play", () => {
     expect(enter(1,1)).toBeTrue()
     expect(occupancy()).toEqual({adults: 1, children: 1})
   })
+  
+  it("Single adult with 2 children cannot enter", function() {
+    reset()
+    expect(enter(1,2)).toBeFalse()
+    expect(occupancy()).toEqual({adults: 0, children: 0})
+  })
+
+  it("2 adults with 1 child can enter", function() {
+    reset()
+    expect(enter(2,1)).toBeTrue()
+    expect(occupancy()).toEqual({adults: 2, children: 1})
+  })
 
   it("Adult can leave when adults 2 and children 1", function() {
     reset()
@@ -25,6 +37,13 @@ describe("Soft Play", () => {
     enter(1,1)
     expect(leave(1,0)).toBeFalse()
     expect(occupancy()).toEqual({adults: 1, children: 1})
+  })
+
+  it("Adult cannot leave when adults 2 and children 2", function() {
+    reset()
+    enter(2,2)
+    expect(leave(1,0)).toBeFalse()
+    expect(occupancy()).toEqual({adults: 2, children: 2})
   })
 
   it("More children cannot leave than are in the soft play center", function() {
@@ -47,10 +66,17 @@ describe("Soft Play", () => {
     expect(occupancy()).toEqual({adults: 1, children: 1})
   })
 
-  it("Adult can leave with children", function() {
+  it("Adult cannot leave with multiple children", function() {
     reset()
-    enter(2,1)
-    expect(leave(2,1)).toBeTrue()
-    expect(occupancy()).toEqual({adults: 0, children: 0})
+    enter(2,2)
+    expect(leave(2,1)).toBeFalse()
+    expect(occupancy()).toEqual({adults: 2, children:2})
+  })
+
+  it("Multiple adults can leave with multiple children", function() {
+    reset()
+    enter(2,2)
+    expect(leave(2,2)).toBeTrue()
+    expect(occupancy()).toEqual({adults: 0, children:0})
   })
 })
