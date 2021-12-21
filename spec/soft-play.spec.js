@@ -53,6 +53,13 @@ describe("Soft Play", () => {
     expect(occupancy()).toEqual({adults: 1, children: 1})
   })
 
+  it("More adults cannot leave than are in the soft play center", function() {
+    reset()
+    expect(enter(1,1)).toBeTrue()
+    expect(leave(2,1)).toBeFalse()
+    expect(occupancy()).toEqual({adults: 1, children: 1})
+  })
+
   it("Child cannot enter on own", function() {
     reset()
     expect(enter(0,1)).toBeFalse()
@@ -69,7 +76,7 @@ describe("Soft Play", () => {
   it("Adult cannot leave with multiple children", function() {
     reset()
     enter(2,2)
-    expect(leave(2,1)).toBeFalse()
+    expect(leave(1,2)).toBeFalse()
     expect(occupancy()).toEqual({adults: 2, children:2})
   })
 
