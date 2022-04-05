@@ -32,7 +32,7 @@ This function is used to register adults and children leaving the soft play cent
 If any of these checks fail, function should return `false`. Otherwise, the function should return `true` and `numAdults` and `numChildren` should be deducted from the current totals.
 
 ### function occupancy()
-This function should return an object with two keys - `adults` should contain the number of children currently inside the soft play center and `children` the number of children. For example:
+This function should return an object with two keys - `adults` should contain the number of adults currently inside the soft play center and `children` the number of children. For example:
 
 ```javascript
 { 
