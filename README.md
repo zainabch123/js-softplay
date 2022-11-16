@@ -110,9 +110,9 @@ A suite of tests has already been created for your functions inside
 
 ```sh
 $ npm test # runs all standard tests
-$ npm test-extensions # runs all extension tests
+$ npm run test-extensions # runs all extension tests
 $ npx eslint src # runs the linter
-$ npx jasmine spec/soft-play.spec.js # runs specific files
+$ npx jasmine path/to/spec/file # runs specific files
 ```
 
 You can focus on passing one test at a time by implementing your functions step by step. When all the tests pass, you know your functions are complete. You can look at the test cases in the `spec/soft-play.spec.js` file, but you should not change any of the code.
