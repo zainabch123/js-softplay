@@ -14,7 +14,7 @@ npm ci
 ## Requirements
 You need to write a program that **maintains a count** of both the number of children and adults inside a soft player center. Inside the `src/soft-play.js` file, you should add the following functions:
 
-### function enter(numAdults, numChildren) 
+### function enter(numAdults, numChildren)
 This function is used to register adults and children entering the soft play center. The function should check for the following conditions:
 
 * Every child entering the soft play center is accompanied by at least 1 adult.
@@ -35,7 +35,7 @@ If any of these checks fail, function should return `false`. Otherwise, the func
 This function should return an object with two keys - `adults` should contain the number of adults currently inside the soft play center and `children` the number of children. For example:
 
 ```javascript
-{ 
+{
   adults: 4,
   children: 3
 }
@@ -61,10 +61,10 @@ The REPL extract below illustrates the expected behavior of the functions.
 ```javascript
 //counts start at 0
 > occupancy()
-{ adults: 0, children: 0 } 
+{ adults: 0, children: 0 }
 
 //2 adults and 1 child enter
-> enter(2, 1) 
+> enter(2, 1)
 true
 
 //counts are updated
@@ -77,7 +77,7 @@ true
 
 //Only 1 adult and 1 child remain
 > occupancy()
-{ adults: 1, children: 1 } 
+{ adults: 1, children: 1 }
 
 //a child attempts to enter on their own, enter returns false
 > enter(0,1)  
@@ -85,30 +85,34 @@ false
 
 //counts stay the same
 > occupancy()
-{ adults: 1, children: 1 } 
+{ adults: 1, children: 1 }
 
 //the last adult attempts to leave so false is returned (as child would be on their own in soft play)
 > leave(1,0)
 false
 
 //counts stay the same
-> occupancy() 
+> occupancy()
 { adults: 1, children: 1 }
 
 //the last child and adult leave together
-> leave(1,1) 
+> leave(1,1)
 true
 
 //both counts are now 0
-> occupancy() 
+> occupancy()
 { adults: 0, children: 0 }
 ```
+
 ## Testing
-A test has already been created for your function inside
-`spec/soft-play.spec.js`. You should not need to modify this file. You can run the tests using npx:
+A suite of tests has already been created for your functions inside
+`spec/soft-play.spec.js`. You should not need to modify this file. You can run the tests using:
 
 ```sh
-$ npx jasmine spec/soft-play.spec.js
+$ npm test # runs all standard tests
+$ npm test-extensions # runs all extension tests
+$ npx eslint src # runs the linter
+$ npx jasmine spec/soft-play.spec.js # runs specific files
 ```
 
 You can focus on passing one test at a time by implementing your functions step by step. When all the tests pass, you know your functions are complete. You can look at the test cases in the `spec/soft-play.spec.js` file, but you should not change any of the code.
@@ -117,7 +121,7 @@ You can focus on passing one test at a time by implementing your functions step 
 Once you have finished the basic functions, you can extend the exercise to include an additional function:
 
 ### total()
-This function should return an object with the same structure as `occupancy`, but the values should be the all-time totals showing how many adults and children have entered the soft play center. For this extension exercise add your own test cases in to `spec/soft-play.spec.js`
+This function should return an object with the same structure as `occupancy`, but the values should be the all-time totals showing how many adults and children have entered the soft play center.
 
 ## Reflection
 Once you have completed the exercise, take a moment to ask yourself the following questions and consider how you could implement changes to your code to support these:
