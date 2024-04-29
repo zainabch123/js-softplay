@@ -7,13 +7,13 @@ let children = 0
 // Start with the occupancy function.
 
 function occupancy() {
-  let total = { adults: adults, children: children };
-  return total;
-};
+  const total = { adults: adults, children: children }
+  return total
+}
 
-console.log(occupancy());
+console.log(occupancy())
 
-let totalEntered = { adults: 0, children: 0 }
+const totalEntered = { adults: 0, children: 0 }
 
 function newPeople(a, c) {
   if (a >= c) {
@@ -21,7 +21,7 @@ function newPeople(a, c) {
     children = children + c
     totalEntered.adults = totalEntered.adults + a
     totalEntered.children = totalEntered.children + c
-    return true;
+    return true
   } else if (a < c) {
     adults = adults + 0
     children = children + 0
@@ -30,16 +30,16 @@ function newPeople(a, c) {
   return occupancy()
 }
 
-console.log(newPeople(0, 0));
-console.log(occupancy());
+console.log(newPeople(0, 0))
+console.log(occupancy())
 
 function total() {
-  return totalEntered;
-};
+  return totalEntered
+}
 
 function leavingPeople(a, c) {
-  let tempAdults = adults - a;
-  let tempChildren = children - c;
+  const tempAdults = adults - a
+  const tempChildren = children - c
   if (a >= c && tempAdults >= tempChildren && a <= adults && c <= children) {
     adults = adults - a
     children = children - c
@@ -50,11 +50,10 @@ function leavingPeople(a, c) {
     return false
   }
   return occupancy()
-  }
+}
 
-console.log(leavingPeople(0, 0));
-console.log(occupancy());
-
+console.log(leavingPeople(0, 0))
+console.log(occupancy())
 
 // TODO: Change the undefined values below to the name of your functions
 module.exports = {
