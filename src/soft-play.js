@@ -15,14 +15,14 @@ console.log(occupancy())
 
 const totalEntered = { adults: 0, children: 0 }
 
-function newPeople(a, c) {
-  if (a >= c) {
-    adults = adults + a
-    children = children + c
-    totalEntered.adults = totalEntered.adults + a
-    totalEntered.children = totalEntered.children + c
+function newPeople(adultNum, childNum) {
+  if (adultNum >= childNum) {
+    adults = adults + adultNum
+    children = children + childNum
+    totalEntered.adults = totalEntered.adults + adultNum
+    totalEntered.children = totalEntered.children + childNum
     return true
-  } else if (a < c) {
+  } else if (adultNum < childNum) {
     adults = adults + 0
     children = children + 0
     return false
@@ -37,14 +37,24 @@ function total() {
   return totalEntered
 }
 
-function leavingPeople(a, c) {
-  const tempAdults = adults - a
-  const tempChildren = children - c
-  if (a >= c && tempAdults >= tempChildren && a <= adults && c <= children) {
-    adults = adults - a
-    children = children - c
+function leavingPeople(adultNum, childNum) {
+  const tempAdults = adults - adultNum
+  const tempChildren = children - childNum
+  if (
+    adultNum >= childNum &&
+    tempAdults >= tempChildren &&
+    adultNum <= adults &&
+    childNum <= children
+  ) {
+    adults = adults - adultNum
+    children = children - childNum
     return true
-  } else if (a < c || tempAdults < tempChildren || a > adults || c > children) {
+  } else if (
+    adultNum < childNum ||
+    tempAdults < tempChildren ||
+    adultNum > adults ||
+    childNum > children
+  ) {
     adults = adults - 0
     children = children - 0
     return false
